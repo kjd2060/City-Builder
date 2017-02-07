@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Animation-Handler.cpp" />
     <ClCompile Include="src\Game-State-Editor.cpp" />
     <ClCompile Include="src\Game-State-Start.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Texture-Manager.cpp" />
+    <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AnimationHandler.hpp" />
@@ -32,6 +34,7 @@
     <ClInclude Include="include\Game-State.hpp" />
     <ClInclude Include="include\Game.hpp" />
     <ClInclude Include="include\Texture-Manager.hpp" />
+    <ClInclude Include="include\Tile.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F039135F-2666-40E3-BD51-4AE00EA4C2F5}</ProjectGuid>
