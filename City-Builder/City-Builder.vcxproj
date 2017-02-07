@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation-Handler.cpp" />
     <ClCompile Include="src\Game-State-Editor.cpp" />
     <ClCompile Include="src\Game-State-Start.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -27,7 +26,7 @@
     <ClCompile Include="src\Texture-Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationHandler.hpp" />
+    <ClInclude Include="include\AnimationHandler.hpp" />
     <ClInclude Include="include\Game-State-Editor.hpp" />
     <ClInclude Include="include\Game-State-Start.hpp" />
     <ClInclude Include="include\Game-State.hpp" />
@@ -88,6 +87,10 @@
     <IncludePath>C:\Users\uc223629\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\uc223629\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -97,6 +100,7 @@
     <Link>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -113,10 +117,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-audio-s.lib;sfml-network-s.lib;sfml-system-s.lib;winmm.lib;ws2_32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;gdi32.lib;opengl32.lib;jpeg.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalOptions>/ENTRY:"mainCRTStartup" %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
