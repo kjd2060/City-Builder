@@ -69,7 +69,7 @@ void Game::loadTextures()
 	texmgr.loadTexture("road", "media/road.png");
 }
 
-void Game::loadTextures()
+void Game::loadTiles()
 {
 	Animation staticAnim(0, 0, 1.0f);
 	this->tileAtlas["grass"] =

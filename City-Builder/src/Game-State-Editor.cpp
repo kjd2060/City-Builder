@@ -6,8 +6,13 @@
 void GameStateEditor::draw(const float dt)
 {
 	this->game->window.clear(sf::Color::Black);
+	
+	this->game->window.setView(this->guiView);
 	this->game->window.draw(this->game->background);
 
+	this->game->window.setView(this->gameView);
+	this->world.draw(this->game->window, dt);
+	
 	return;
 }
 
@@ -57,4 +62,15 @@ GameStateEditor::GameStateEditor(Game* game)
 	pos *= 0.5f;
 	this->guiView.setCenter(pos);
 	this->gameView.setCenter(pos);
+
+	world = World("maps/city-map01.dat", 64, 64, game->tileAtlas);
+
+	this->zoomLevel = 1.0f;
+
+	// center camera on map
+	sf::Vector2f center(this->world.width, this->world.height*0.5);
+	center *= float(this->world.tileSize);
+	gameView.setCenter(center);
+
+	this->actionState = ActionState::NONE;
 }
