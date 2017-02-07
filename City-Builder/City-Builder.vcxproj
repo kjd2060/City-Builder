@@ -18,6 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Game-State-Editor.cpp" />
+    <ClCompile Include="src\Game-State-Start.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Texture-Manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Game-State-Editor.hpp" />
+    <ClInclude Include="include\Game-State-Start.hpp" />
+    <ClInclude Include="include\Game-State.hpp" />
+    <ClInclude Include="include\Game.hpp" />
+    <ClInclude Include="include\Texture-Manager.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F039135F-2666-40E3-BD51-4AE00EA4C2F5}</ProjectGuid>
     <RootNamespace>CityBuilder</RootNamespace>
@@ -69,7 +83,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\uc223629\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -79,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -116,13 +130,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Game-State.hpp" />
-    <ClInclude Include="Game.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
