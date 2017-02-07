@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation-Handler.cpp" />
     <ClCompile Include="src\Game-State-Editor.cpp" />
     <ClCompile Include="src\Game-State-Start.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -26,6 +27,7 @@
     <ClCompile Include="src\Texture-Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationHandler.hpp" />
     <ClInclude Include="include\Game-State-Editor.hpp" />
     <ClInclude Include="include\Game-State-Start.hpp" />
     <ClInclude Include="include\Game-State.hpp" />
