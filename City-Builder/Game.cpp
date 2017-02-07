@@ -1,9 +1,10 @@
 #include <stack>
 
-#include <SDL.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
-#include "Game.h"
-#include "Game-State.h"
+#include "Game.hpp"
+#include "Game-State.hpp"
 
 void Game::pushState(GameState * state)
 {
@@ -30,45 +31,39 @@ void Game::changeState(GameState* state)
 
 GameState* Game::peekState()
 {
-	SDL_AtomicLock clock;
-
-	
+	if (this->states.empty()) 
+		return nullptr;
+	return this->states.top();
 }
 
-void Game::InitSDL()
+void Game::gameLoop()
 {
-	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	sf::Clock clock;
+
+	while (this->window.isOpen())
 	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		sf::Time elapsed = clock.restart();
+		float dt = elapsed.asSeconds();
+
+		if (peekState() == nullptr) 
+			continue;
+		peekState()->handleInput();
+		peekState()->update(dt);
+		this->window.clear(sf::Color::Black);
+		peekState()->draw(dt);
+		this->window.display();
 	}
-	else
-	{
-		//Create window
-		window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (window == NULL)
-		{
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		}
-		else
-		{
-			//Get window surface
-			screenSurface = SDL_GetWindowSurface(window);
-
-			//Fill the surface white
-			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-
-			//Update the surface
-			SDL_UpdateWindowSurface(window);
-
-			//Wait two seconds
-			SDL_Delay(2000);
-		}
-	}
-
-	//Destroy window
-	SDL_DestroyWindow(window);
-
-	//Quit SDL subsystems
-	SDL_Quit();
 }
+
+Game::Game()
+{
+	this->window.create(sf::VideoMode(800, 600), "City Builder");
+	this->window.setFramerateLimit(60);
+}
+
+Game::~Game()
+{
+	while (!this->states.empty()) 
+		popState();
+}
+
