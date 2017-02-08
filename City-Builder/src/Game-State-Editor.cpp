@@ -141,42 +141,51 @@ void GameStateEditor::handleInput()
 		}
 		case sf::Event::MouseWheelMoved:
 		{
-			this->actionState = ActionState::ZOOMING;
-			float targetZoom = 1.0f;
-			if (event.mouseWheel.delta < 0 && zoomLevel <= zoomMax)
-				targetZoom = 2.25f;
-			else if (zoomLevel >= zoomMin && event.mouseWheel.delta > 0)
-				targetZoom = 0.25f;
-			else
-				break;
-
-			float currentZoom = 1.0f;
-			previousZoom = currentZoom;
-
-
-			sf::Vector2f currentCenter = gameView.getCenter();
-			sf::Vector2f targetCenter = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), gameView);
-
-
-			float lerpFactor = 0.15f;
-			currentZoom = KMath::lerp(lerpFactor, currentZoom, targetZoom);
-			gameView.zoom(1.0f + (currentZoom - previousZoom));
-
-			currentCenter.x = KMath::lerp(lerpFactor, currentCenter.x, targetCenter.x);
-			currentCenter.y = KMath::lerp(lerpFactor, currentCenter.y, targetCenter.y);
-			gameView.setCenter(currentCenter);
-
-			zoomLevel *= 1.0f + (currentZoom - previousZoom);
-
-			previousZoom = currentZoom;
-
-			this->actionState = ActionState::NONE;
+			// handle zooming in seperate function; zooms dynamically using a LERP
+			zoom(event);
 		}
 
 		break;
 		default:break;
 		}
 	}
+
+	return;
+}
+
+void GameStateEditor::zoom(sf::Event &event)
+{
+	this->actionState = ActionState::ZOOMING;
+	float targetZoom = 1.0f;
+	if (event.mouseWheel.delta < 0 && zoomLevel <= zoomMax)
+		targetZoom = 2.25f;
+	else if (zoomLevel >= zoomMin && event.mouseWheel.delta > 0)
+		targetZoom = 0.25f;
+	else
+		return;
+
+	float currentZoom = 1.0f;
+	previousZoom = currentZoom;
+
+
+	sf::Vector2f currentCenter = gameView.getCenter();
+	sf::Vector2f targetCenter = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), gameView);
+
+
+	float lerpFactor = 0.15f;
+	currentZoom = KMath::lerp(lerpFactor, currentZoom, targetZoom);
+	gameView.zoom(1.0f + (currentZoom - previousZoom));
+
+	currentCenter.x = KMath::lerp(lerpFactor, currentCenter.x, targetCenter.x);
+	currentCenter.y = KMath::lerp(lerpFactor, currentCenter.y, targetCenter.y);
+	gameView.setCenter(currentCenter);
+
+	zoomLevel *= 1.0f + (currentZoom - previousZoom);
+
+	previousZoom = currentZoom;
+
+	if (fabs(targetZoom - currentZoom) < 0.01f)
+		this->actionState = ActionState::NONE;
 
 	return;
 }
@@ -206,4 +215,6 @@ GameStateEditor::GameStateEditor(Game* game)
 	this->selectionEnd = sf::Vector2i(0, 0);
 
 	this->currentTile = &this->game->tileAtlas.at("grass");
+
+	world.view = &gameView;
 }

@@ -27,6 +27,8 @@ private:
 
 	Tile* currentTile;
 
+	void zoom(sf::Event &event);
+
 public:
 
 	const float zoomMax = 3.25;

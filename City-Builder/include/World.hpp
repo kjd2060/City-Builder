@@ -11,6 +11,9 @@
 class World
 {
 private:
+
+	
+
 	void depthfirstsearch(std::vector<TileType> &whiteList, sf::Vector2i pos, int label, int type);
 
 public:
@@ -18,6 +21,7 @@ public:
 	unsigned int width;
 	unsigned int height;
 
+	sf::View *view;
 	std::vector <Tile> tiles;
 
 	// resource map
@@ -60,6 +64,7 @@ public:
 		this->height = 0;
 		this->numRegions[0] = 1;
 		this->numSelected = 0;
+		this->view = nullptr;
 	}
 	// load world from file constructor
 	World(const std::string &filename, unsigned int width, unsigned int height,
@@ -67,6 +72,7 @@ public:
 	{
 		this->tileSize = 8;
 		this->numSelected = 0;
+		this->view = nullptr;
 		load(filename, width, height, tileAtlas);
 	}
 };

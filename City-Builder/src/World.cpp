@@ -88,6 +88,8 @@ void World::save(const std::string &filename)
 
 void World::draw(sf::RenderWindow &window, float dt)
 {
+	int culled = 0;
+	int notCulled = 0;
 	for (int y = 0; y < this->height; ++y)
 	{
 		for (int x = 0; x < this->width; ++x)
@@ -96,18 +98,28 @@ void World::draw(sf::RenderWindow &window, float dt)
 			sf::Vector2f pos;
 			pos.x = (x - y) * this->tileSize + this->width * this->tileSize;
 			pos.y = (x + y) * this->tileSize * 0.5;
-			this->tiles[y*this->width + x].sprite.setPosition(pos);
+			
+			// don't draw if the position is outside of the viewport
+			if (pos.x >= 0 && pos.x <= view->
+			{
+				this->tiles[y*this->width + x].sprite.setPosition(pos);
 
-			// change color if tile is selected
-			if (this->selected[y * this->width + x])
-				this->tiles[y*this->width + x].sprite.setColor(sf::Color(0x7d, 0x7d, 0x7d));
+				// change color if tile is selected
+				if (this->selected[y * this->width + x])
+					this->tiles[y*this->width + x].sprite.setColor(sf::Color(0x7d, 0x7d, 0x7d));
+				else
+					this->tiles[y*this->width + x].sprite.setColor(sf::Color(0xff, 0xff, 0xff));
+
+				// draw tiles
+				this->tiles[y*this->width + x].draw(window, dt);
+				++notCulled;
+			}
 			else
-				this->tiles[y*this->width + x].sprite.setColor(sf::Color(0xff, 0xff, 0xff));
-
-			// draw tiles
-			this->tiles[y*this->width + x].draw(window, dt);
+				++culled;
 		}
 	}
+	std::cout << "Culled: " << culled << "\n";
+	std::cout << "Not culled: " << notCulled << "\n";
 }
 
 void World::clearSelected()
