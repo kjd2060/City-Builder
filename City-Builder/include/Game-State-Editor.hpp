@@ -5,7 +5,7 @@
 #include "Game-State.hpp"
 #include "World.hpp"
 
-enum class ActionState { NONE, PANNING, ZOOMING };
+enum class ActionState { NONE, PANNING, ZOOMING, SELECTING };
 
 class GameStateEditor : public GameState
 {
@@ -21,6 +21,11 @@ private:
 	sf::Vector2i panningAnchor;
 	float zoomLevel;
 	float previousZoom;
+
+	sf::Vector2i selectionStart;
+	sf::Vector2i selectionEnd;
+
+	Tile* currentTile;
 
 public:
 

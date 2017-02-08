@@ -25,6 +25,7 @@ void World::load(const std::string &filename, unsigned int width, unsigned int h
 	for (int pos = 0; pos < this->width * this->height; ++pos)
 	{
 		this->resources.push_back(255);
+		this->selected.push_back(0);
 
 		TileType tileType;
 		inputFile.read((char*)&tileType, sizeof(int));
@@ -97,10 +98,73 @@ void World::draw(sf::RenderWindow &window, float dt)
 			pos.y = (x + y) * this->tileSize * 0.5;
 			this->tiles[y*this->width + x].sprite.setPosition(pos);
 
+			// change color if tile is selected
+			if (this->selected[y * this->width + x])
+				this->tiles[y*this->width + x].sprite.setColor(sf::Color(0x7d, 0x7d, 0x7d));
+			else
+				this->tiles[y*this->width + x].sprite.setColor(sf::Color(0xff, 0xff, 0xff));
+
 			// draw tiles
 			this->tiles[y*this->width + x].draw(window, dt);
 		}
 	}
+}
+
+void World::clearSelected()
+{
+	for (auto &tile : this->selected)
+		tile = 0;
+	this->numSelected = 0;
+	return;
+}
+
+void World::select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> blacklist)
+{
+	// swap coordinates if necessary
+	if (end.y < start.y)
+		std::swap(start.y, end.y);
+	if (end.x < start.x)
+		std::swap(start.x, end.x);
+
+	// clamp in range
+	if (end.x >= this->width)
+		end.x = this->width - 1;
+	else if (end.x < 0)
+		end.x = 0;
+	if (end.y >= this->height)
+		end.y = this->height - 1;
+	else if (end.y < 0)
+		end.y = 0;
+	if (start.x >= this->width)
+		start.x = this->width - 1;
+	else if (start.x < 0)
+		start.x = 0;
+	if (start.y >= this->height)
+		start.y = this->height - 1;
+	else if (start.y < 0)
+		start.y = 0;
+
+	for (int y = start.y; y <= end.y; ++y)
+	{
+		for (int x = start.x; x <= end.x; ++x)
+		{
+			// check if tile type is in blacklist.  
+			// If it is, mark as invalid; otherwise, select it.
+			this->selected[y*this->width + x] = 1;
+			++this->numSelected;
+			for (auto type : blacklist)
+			{
+				if (this->tiles[y*this->width + x].tileType == type)
+				{
+					this->selected[y*this->width + x] = 2;
+					--this->numSelected;
+					break;
+				}
+			}
+		}
+	}
+
+	return;
 }
 
 void World::updateDirection(TileType tileType)

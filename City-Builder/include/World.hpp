@@ -23,8 +23,11 @@ public:
 	// resource map
 	std::vector<int> resources;
 
-	unsigned int tileSize;
+	// 0 = selected, 1 = selected, 2 = invalid
+	std::vector<char> selected;
 	unsigned int numSelected;
+	
+	unsigned int tileSize;
 	unsigned int numRegions[1];
 
 	// load map from disk
@@ -45,6 +48,10 @@ public:
 	// used to orient roads, pylons, rivers, etc
 	void updateDirection(TileType tileType);
 
+	void select(sf::Vector2i start, sf::Vector2i end, std::vector<TileType> blacklist);
+
+	void clearSelected();
+
 	// blank world constructor
 	World()
 	{
@@ -52,12 +59,14 @@ public:
 		this->width = 0;
 		this->height = 0;
 		this->numRegions[0] = 1;
+		this->numSelected = 0;
 	}
 	// load world from file constructor
 	World(const std::string &filename, unsigned int width, unsigned int height,
 		std::map<std::string, Tile> &tileAtlas)
 	{
 		this->tileSize = 8;
+		this->numSelected = 0;
 		load(filename, width, height, tileAtlas);
 	}
 };
