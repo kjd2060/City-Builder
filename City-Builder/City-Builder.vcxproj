@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\KMath.cpp" />
     <ClCompile Include="src\Animation-Handler.cpp" />
     <ClCompile Include="src\Game-State-Editor.cpp" />
     <ClCompile Include="src\Game-State-Start.cpp" />
@@ -37,6 +38,10 @@
     <ClInclude Include="include\Texture-Manager.hpp" />
     <ClInclude Include="include\Tile.hpp" />
     <ClInclude Include="include\World.hpp" />
+    <ClInclude Include="include\KMath.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F039135F-2666-40E3-BD51-4AE00EA4C2F5}</ProjectGuid>

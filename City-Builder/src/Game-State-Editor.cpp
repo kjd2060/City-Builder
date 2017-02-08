@@ -2,17 +2,19 @@
 
 #include "Game-State.hpp"
 #include "Game-State-Editor.hpp"
+#include <iostream>
+#include "KMath.hpp"
 
 void GameStateEditor::draw(const float dt)
 {
 	this->game->window.clear(sf::Color::Black);
-	
+
 	this->game->window.setView(this->guiView);
 	this->game->window.draw(this->game->background);
 
 	this->game->window.setView(this->gameView);
 	this->world.draw(this->game->window, dt);
-	
+
 	return;
 }
 
@@ -29,7 +31,7 @@ void GameStateEditor::handleInput()
 	{
 		switch (event.type)
 		{
-		// close window
+			// close window
 		case sf::Event::Closed:
 		{
 			this->game->window.close();
@@ -82,18 +84,43 @@ void GameStateEditor::handleInput()
 		}
 		case sf::Event::MouseWheelMoved:
 		{
-			if (event.mouseWheel.delta < 0)
-			{
-				gameView.zoom(2.0f);
-				zoomLevel *= 2.0f;
-			}
+			this->actionState = ActionState::ZOOMING;
+			float targetZoom = 1.0f;
+			if (event.mouseWheel.delta < 0 && zoomLevel <= zoomMax)
+				targetZoom = 2.25f;
+			else if (zoomLevel >= zoomMin && event.mouseWheel.delta > 0)
+				targetZoom = 0.25f;
 			else
-			{
-				gameView.zoom(0.5f);
-				zoomLevel *= 0.5f;
-			}
-			break;
+				break;
+
+			float currentZoom = 1.0f;
+			previousZoom = currentZoom;
+
+
+			sf::Vector2f currentCenter = gameView.getCenter();
+			sf::Vector2f targetCenter = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), gameView);
+
+
+			float lerpFactor = 0.15f;
+			currentZoom = KMath::lerp(lerpFactor, currentZoom, targetZoom);
+			gameView.zoom(1.0f + (currentZoom - previousZoom));
+
+			currentCenter.x = KMath::lerp(lerpFactor, currentCenter.x, targetCenter.x);
+			currentCenter.y = KMath::lerp(lerpFactor, currentCenter.y, targetCenter.y);
+			gameView.setCenter(currentCenter);
+
+			zoomLevel *= 1.0f + (currentZoom - previousZoom);
+
+			previousZoom = currentZoom;
+
+			std::cout << "Current Zoom: " << currentZoom << "\n";
+
+
+			this->actionState = ActionState::NONE;
 		}
+
+		std::cout << "Zoom  Level: " << zoomLevel << "\n";
+		break;
 		default:break;
 		}
 	}
