@@ -2,13 +2,19 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <map>
+#include <string>
+
 #include "Game-State.hpp"
+#include "GUI.hpp"
 
 class GameStateStart : public GameState
 {
 private:
 
 	sf::View view;
+
+	std::map<std::string, Gui> guiSystem;
 
 	void loadgame();
 

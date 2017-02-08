@@ -170,13 +170,9 @@ void GameStateEditor::handleInput()
 
 			previousZoom = currentZoom;
 
-			std::cout << "Current Zoom: " << currentZoom << "\n";
-
-
 			this->actionState = ActionState::NONE;
 		}
 
-		std::cout << "Zoom  Level: " << zoomLevel << "\n";
 		break;
 		default:break;
 		}

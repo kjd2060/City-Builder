@@ -253,7 +253,7 @@ void World::depthfirstsearch(std::vector<TileType> &whitelist, sf::Vector2i pos,
 		}
 	}
 
-	if (!found) 
+	if (!found)
 		return;
 
 	this->tiles[pos.y*this->width + pos.x].regions[regionType] = label;
