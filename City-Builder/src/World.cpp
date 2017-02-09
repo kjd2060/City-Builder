@@ -88,8 +88,6 @@ void World::save(const std::string &filename)
 
 void World::draw(sf::RenderWindow &window, float dt)
 {
-	int culled = 0;
-	int notCulled = 0;
 	for (int y = 0; y < this->height; ++y)
 	{
 		for (int x = 0; x < this->width; ++x)
@@ -100,7 +98,10 @@ void World::draw(sf::RenderWindow &window, float dt)
 			pos.y = (x + y) * this->tileSize * 0.5;
 			
 			// don't draw if the position is outside of the viewport
-			if (pos.x >= 0 && pos.x <= view->
+			if (pos.x >= window.mapPixelToCoords(sf::Vector2i(view->getViewport().left, view->getViewport().top)).x - this->tileSize*2 &&
+				pos.x <= window.mapPixelToCoords(sf::Vector2i(window.getSize().x, view->getViewport().top)).x + this->tileSize * 2 &&
+				pos.y >= window.mapPixelToCoords(sf::Vector2i(view->getViewport().left, view->getViewport().top)).y - this->tileSize &&
+				pos.y <= window.mapPixelToCoords(sf::Vector2i(view->getViewport().left, window.getSize().y)).y + this->tileSize)
 			{
 				this->tiles[y*this->width + x].sprite.setPosition(pos);
 
@@ -112,14 +113,9 @@ void World::draw(sf::RenderWindow &window, float dt)
 
 				// draw tiles
 				this->tiles[y*this->width + x].draw(window, dt);
-				++notCulled;
 			}
-			else
-				++culled;
 		}
 	}
-	std::cout << "Culled: " << culled << "\n";
-	std::cout << "Not culled: " << notCulled << "\n";
 }
 
 void World::clearSelected()
