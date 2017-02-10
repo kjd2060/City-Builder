@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\City.cpp" />
     <ClCompile Include="src\Gui.cpp" />
     <ClCompile Include="src\KMath.cpp" />
     <ClCompile Include="src\Animation-Handler.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\City.hpp" />
     <ClInclude Include="include\GUI.hpp" />
     <ClInclude Include="include\AnimationHandler.hpp" />
     <ClInclude Include="include\Game-State-Editor.hpp" />
@@ -93,8 +95,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\libs\SFML-2.4.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\uc223629\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\include;F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\libs\SFML-2.4.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\lib;F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Users\uc223629\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\include;$(IncludePath)</IncludePath>
@@ -109,12 +111,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\libs\SFML-2.4.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\uc223629\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\include;F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\libs\SFML-2.4.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\libs\SFML-2.4.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\uc223629\Documents\Libraries\SFML-2.4.1\lib;F:\Users\Documents\Visual Studio 2015\Projects\City-Builder\City-Builder\libs\SFML-2.4.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

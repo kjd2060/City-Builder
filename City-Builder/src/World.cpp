@@ -191,50 +191,50 @@ void World::updateDirection(TileType tileType)
 			if (x > 0 && y > 0)
 				adjacentTiles[0][0] = (this->tiles[(y - 1)*this->width + (x - 1)].tileType == tileType);
 			if (y > 0)
-				adjacentTiles[0][3] = (this->tiles[(y - 1)*this->width + (x)].tileType == tileType);
+				adjacentTiles[0][1] = (this->tiles[(y - 1)*this->width + (x)].tileType == tileType);
 			if (x < this->width - 1 && y > 0)
-				adjacentTiles[0][4] = (this->tiles[(y - 1)*this->width + (x + 1)].tileType == tileType);
+				adjacentTiles[0][2] = (this->tiles[(y - 1)*this->width + (x + 1)].tileType == tileType);
 			if (x > 0)
 				adjacentTiles[1][0] = (this->tiles[(y)*this->width + (x - 1)].tileType == tileType);
 			if (x < width - 1)
-				adjacentTiles[1][5] = (this->tiles[(y)*this->width + (x + 1)].tileType == tileType);
+				adjacentTiles[1][2] = (this->tiles[(y)*this->width + (x + 1)].tileType == tileType);
 			if (x > 0 && y < this->height - 1)
 				adjacentTiles[2][0] = (this->tiles[(y + 1)*this->width + (x - 1)].tileType == tileType);
 			if (y < this->height - 1)
-				adjacentTiles[2][6] = (this->tiles[(y + 1)*this->width + (x)].tileType == tileType);
+				adjacentTiles[2][1] = (this->tiles[(y + 1)*this->width + (x)].tileType == tileType);
 			if (x < this->width - 1 && y < this->height - 1)
-				adjacentTiles[2][7] = (this->tiles[(y + 1)*this->width + (x + 1)].tileType == tileType);
+				adjacentTiles[2][2] = (this->tiles[(y + 1)*this->width + (x + 1)].tileType == tileType);
 
 			/* Change the tile variant depending on the tile position */
-			if (adjacentTiles[1][0] && adjacentTiles[1][8] && adjacentTiles[0][9] && adjacentTiles[2][10])
+			if (adjacentTiles[1][0] && adjacentTiles[1][2] && adjacentTiles[0][1] && adjacentTiles[2][1])
 				this->tiles[pos].tileVariant = 2;
-			else if (adjacentTiles[1][0] && adjacentTiles[1][11] && adjacentTiles[0][12])
+			else if (adjacentTiles[1][0] && adjacentTiles[1][2] && adjacentTiles[0][1])
 				this->tiles[pos].tileVariant = 7;
-			else if (adjacentTiles[1][0] && adjacentTiles[1][13] && adjacentTiles[2][14])
+			else if (adjacentTiles[1][0] && adjacentTiles[1][2] && adjacentTiles[2][1])
 				this->tiles[pos].tileVariant = 8;
-			else if (adjacentTiles[0][15] && adjacentTiles[2][16] && adjacentTiles[1][0])
+			else if (adjacentTiles[0][1] && adjacentTiles[2][1] && adjacentTiles[1][0])
 				this->tiles[pos].tileVariant = 9;
-			else if (adjacentTiles[0][16] && adjacentTiles[2][17] && adjacentTiles[1][18])
+			else if (adjacentTiles[0][1] && adjacentTiles[2][1] && adjacentTiles[1][2])
 				this->tiles[pos].tileVariant = 10;
-			else if (adjacentTiles[1][0] && adjacentTiles[1][19])
+			else if (adjacentTiles[1][0] && adjacentTiles[1][2])
 				this->tiles[pos].tileVariant = 0;
-			else if (adjacentTiles[0][20] && adjacentTiles[2][21])
+			else if (adjacentTiles[0][1] && adjacentTiles[2][1])
 				this->tiles[pos].tileVariant = 1;
-			else if (adjacentTiles[2][22] && adjacentTiles[1][0])
+			else if (adjacentTiles[2][1] && adjacentTiles[1][0])
 				this->tiles[pos].tileVariant = 3;
-			else if (adjacentTiles[0][23] && adjacentTiles[1][24])
+			else if (adjacentTiles[0][1] && adjacentTiles[1][2])
 				this->tiles[pos].tileVariant = 4;
-			else if (adjacentTiles[1][0] && adjacentTiles[0][25])
+			else if (adjacentTiles[1][0] && adjacentTiles[0][1])
 				this->tiles[pos].tileVariant = 5;
-			else if (adjacentTiles[2][26] && adjacentTiles[1][27])
+			else if (adjacentTiles[2][1] && adjacentTiles[1][2])
 				this->tiles[pos].tileVariant = 6;
 			else if (adjacentTiles[1][0])
 				this->tiles[pos].tileVariant = 0;
-			else if (adjacentTiles[1][28])
+			else if (adjacentTiles[1][2])
 				this->tiles[pos].tileVariant = 0;
-			else if (adjacentTiles[0][29])
+			else if (adjacentTiles[0][1])
 				this->tiles[pos].tileVariant = 1;
-			else if (adjacentTiles[2][30])
+			else if (adjacentTiles[2][1])
 				this->tiles[pos].tileVariant = 1;
 		}
 	}

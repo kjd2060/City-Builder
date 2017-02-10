@@ -4,6 +4,7 @@
 
 #include "Game-State.hpp"
 #include "World.hpp"
+#include "City.hpp"
 
 enum class ActionState { NONE, PANNING, ZOOMING, SELECTING };
 
@@ -16,7 +17,7 @@ private:
 	sf::View gameView;
 	sf::View guiView;
 
-	World world;
+	City city;
 
 	sf::Vector2i panningAnchor;
 	float zoomLevel;
@@ -26,6 +27,8 @@ private:
 	sf::Vector2i selectionEnd;
 
 	Tile* currentTile;
+
+	std::map<std::string, Gui> guiSystem;
 
 	void zoom(sf::Event &event);
 
