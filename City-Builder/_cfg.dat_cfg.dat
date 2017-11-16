@@ -1,0 +1,14 @@
+width=0
+height=0
+day=0
+populationPool=0
+employmentPool=0
+population=0
+employable=0
+birthRate=5.5
+deathRate=2.3
+residentialTax=0.05
+commercialTax=0.05
+industrialTax=0.05
+funds=0
+earnings=0

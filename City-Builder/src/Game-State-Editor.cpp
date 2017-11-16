@@ -28,10 +28,10 @@ void GameStateEditor::update(const float dt)
 
 	// update info bar on the bottom of the screen
 	this->guiSystem.at("infoBar").setEntryText(0, "Day: " + std::to_string(city.day));
-	this->guiSystem.at("infoBar").setEntryText(1, "$" + std::to_string(long(this->city.funds)));
-	this->guiSystem.at("infoBar").setEntryText(2, std::to_string(long(this->city.population)) + " (" + std::to_string(long(this->city.getHomeless())) + ")");
-	this->guiSystem.at("infoBar").setEntryText(3, std::to_string(long(this->city.employable)) + " (" + std::to_string(long(this->city.getUnemployed())) + ")");
-	this->guiSystem.at("infoBar").setEntryText(4, tileTypeToStr(currentTile->tileType));
+	this->guiSystem.at("infoBar").setEntryText(1, "Cur $: $" + std::to_string(long(this->city.funds)));
+	this->guiSystem.at("infoBar").setEntryText(2, "Cur Pop: " + std::to_string(long(this->city.population)) + " (" + std::to_string(long(this->city.getHomeless())) + ")");
+	this->guiSystem.at("infoBar").setEntryText(3, "Cur Empl: " + std::to_string(long(this->city.employable)) + " (" + std::to_string(long(this->city.getUnemployed())) + ")");
+	this->guiSystem.at("infoBar").setEntryText(4, "Tile: " + tileTypeToStr(currentTile->tileType));
 
 	return;
 }

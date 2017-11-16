@@ -134,6 +134,7 @@ void City::load(std::string cityName, std::map<std::string, Tile> &tileAtlas)
 	return;
 }
 
+
 void City::save(std::string cityName)
 {
 	std::ofstream outputFile(cityName + "_cfg.dat", std::ios::out);
@@ -192,7 +193,7 @@ void City::update(float dt)
 		else if (tile.tileType == TileType::COMMERCIAL)
 		{
 			// hire people
-			if (rand() % 100 < 15 * (1.0 - this->commercialTax))
+			if (rand() % 100 < 10 * (1.0 - this->commercialTax))
 				this->distributePool(this->employmentPool, tile, 0.00);
 		}
 		else if (tile.tileType == TileType::INDUSTRIAL)
@@ -205,7 +206,7 @@ void City::update(float dt)
 			}
 
 			// hire people
-			if (rand() % 100 < 15 * (1.0 - this->industrialTax))
+			if (rand() % 100 < 10 * (1.0 - this->industrialTax))
 				this->distributePool(this->employmentPool, tile, 0.0);
 		}
 		tile.update();
@@ -279,7 +280,24 @@ void City::update(float dt)
 	}
 
 	// adjust population pool for births and deaths
-	this->populationPool += this->populationPool * (this->birthRate - this->deathRate);
+	// if adequate housing is available (< 10% homelessness)
+	// quick note: The birth rate and death rate is set in the header, but it's also set in individual city configs.
+	// This is an 'example city' that doesn't generate a new one every time, but uses one I've saved to a file.  To change the birth and death rates,
+	// the values in maps/city_cfg.dat.  Once city generation is implemented, then the birth and death rates will continue to be local to cities but will be
+	// defined by their cfg files.
+	// at some point probably want a 'move in' and 'demand' factor instead of just upping the 'birth rate' to model people moving to the city from
+	// outside
+	if (this->getHomeless() < (popTotal + this->populationPool)*.10)
+	{
+		this->populationPool += this->populationPool * (this->birthRate - this->deathRate) * (((double)rand() / (RAND_MAX)) + 1); // birth rate + hidden 'move in rate'
+
+		
+	}
+	else
+	{
+		//this->populationPool += this->populationPool * (this->birthRate*(.10/this->populationPool) - this->deathRate*this->getHomeless()*.1); // just the birth rate
+		this->populationPool = this->populationPool;
+	}
 	popTotal += this->populationPool;
 
 	// adjust employment pool for changing population

@@ -32,7 +32,7 @@ void Tile::update()
 		this->population == this->maxPopPerLevel * (this->tileVariant + 1) &&
 		this->tileVariant < this->maxLevels)
 	{
-		if (rand() % int(1e4) < 1e2 / (this->tileVariant + 1))
+		if (rand() % int(1e3) < 1e2 / (this->tileVariant + 1))
 			++this->tileVariant;
 	}
 
@@ -51,5 +51,6 @@ std::string tileTypeToStr(TileType type)
 	case TileType::RESIDENTIAL: return "Residential Zone";
 	case TileType::COMMERCIAL:  return "Commercial Zone";
 	case TileType::INDUSTRIAL:  return "Industrial Zone";
+	case TileType::ROAD:		return "Road";
 	}
 }

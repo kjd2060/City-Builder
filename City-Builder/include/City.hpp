@@ -24,7 +24,8 @@ private:
 
 	// proportino of residents who die/give birth each day
 	// esitmate death rate = 1 / (life expectancy * 360)
-	// values are currently .000055 and .000023 respectively
+	// very low values, but semi-realistic are .000055 and .000023.
+	// values for better gameplay are .0055 and .0023
 	double birthRate;
 	double deathRate;
 
@@ -48,8 +49,8 @@ public:
 
 	City()
 	{
-		this->birthRate = 0.00055;
-		this->deathRate = 0.00023;
+		this->birthRate = 5.5;
+		this->deathRate = 2.3;
 		this->propCanWork = 0.50;
 		this->populationPool = 0;
 		this->population = populationPool;
@@ -63,6 +64,10 @@ public:
 		this->currentTime = 0;
 		this->timePerDay = 1.0;
 		this->day = 0;
+		int temp = rand();
+		std::string cityName = "city" + temp;
+		cityName = cityName + "_cfg.dat";
+		save(cityName);
 	}
 
 	City(std::string cityName, int tileSize, std::map<std::string, Tile> &tileAtlas) : City()
