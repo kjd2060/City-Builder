@@ -1,4 +1,4 @@
-Welcome to my super simple city builder game.  This is an isometric game where you can make a city from a 2D grid of tiles that evolves over time.  Player can bulldoze areas and place new tiles and then watch as their population grows over time.  Actions are performed using city funds.  Tiles are grass, forest, water, roads, and zones (residential, commercial, industrial).  There is room for a lot of new tile types!  
+Super simple city builder game built when playing around and learning SFML2.  This is an isometric game where you can make a city from a 2D grid of tiles that evolves over time.  Player can bulldoze areas and place new tiles and then watch as their population grows over time.  Actions are performed using city funds.  Tiles are grass, forest, water, roads, and zones (residential, commercial, industrial).  There is room for a lot of new tile types!  
 
 Residential acts as housing for population, commercial zones sell goods and employ people, industrial zones supply goods to commercial zones and employ people.  Goods are transported via roads, while all other tiles act as restrictions for what can be placed there and otherwise are aesthetic.
 
